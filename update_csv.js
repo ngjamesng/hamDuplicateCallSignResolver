@@ -24,10 +24,10 @@ fs.createReadStream(inputFilename)
 
     // First pass: count duplicates
     data.forEach((row) => {
-      if (row.mode !== fm) return;
-      const repeaterCall = row[repeaterCallSign];
-      if (!repeaterCall) return; // ignore any rows without a callsign
-      repeaterCallCounts[repeaterCall] = (repeaterCallCounts[repeaterCall] || 0) + 1;
+      if (row.Mode !== fm) return;
+      const callsign = row[repeaterCallSign];
+      if (!callsign) return; // ignore any rows with a blank callsign
+      repeaterCallCounts[callsign] = (repeaterCallCounts[callsign] || 0) + 1;
     });
 
     // Second pass: update duplicates
@@ -35,19 +35,21 @@ fs.createReadStream(inputFilename)
 
     data.forEach((row) => {
       if (row.Mode !== fm) return;
-      const repeaterCall = row[repeaterCallSign];
-      if (!repeaterCall) return; // ignore any rows without a callsign
-      if (repeaterCall === 1) return;
-      // Only update if duplicates exist
-      if (!repeaterCallIndices[repeaterCall]) {
-        repeaterCallIndices[repeaterCall] = 1;
+      const callsign = row[repeaterCallSign];
+      if (!callsign) return; // ignore any rows with a blank callsign
+      if (repeaterCallCounts[callsign] === 1) return; // leave unique callsigns intact
+
+      // Otherwise, Only update if duplicates exist
+      if (!(callsign in repeaterCallIndices)) {
+        repeaterCallIndices[callsign] = 1;
       }
-      row[repeaterCallSign] = `${repeaterCall}/${String(repeaterCallIndices[repeaterCall])}`;
-      repeaterCallIndices[repeaterCall]++;
+      const callsignWIthIdx = `${callsign}/${repeaterCallIndices[callsign]}`; // AAAAA/1, AAAAA/2, etc
+      row[repeaterCallSign] = callsignWIthIdx;
+      repeaterCallIndices[callsign]++;
     });
 
     // Write to the output CSV
-    const headers = Object.keys(data[0]).map((header) => ({ id: header, title: header })); // Get headers dynamically
+    const headers = Object.keys(data[0]).map((header) => ({ id: header, title: header }));
 
     const csvWriter = createCsvWriter({
       path: outputFilename,
