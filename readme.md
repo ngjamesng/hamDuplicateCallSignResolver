@@ -24,7 +24,7 @@ this would be updated to the following:
 
 ### Limitations
 
-Due to certain limitations, this does not account for the following:
+Due to certain limitations, this does not account for the following, and are out of scope of for the purpose of this script:
 * Since the maximum callsign length is 8 on the device, duplicate long callsigns that are long enough to cause the string to exceed the length will will still break. 
 * rows in which the callsign is blank. The script will ignore any rows without a callsign. 
 
