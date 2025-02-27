@@ -2,7 +2,7 @@
 
 I recently started getting into the amateur/ham radio space. I downloaded a publicly available repeater list as a csv. While using my Icom ID-52, I loaded the list into my transceiver noticed that the callsigns were not displaying for some of those repeaters. I decided add the callsign manually, and received a "Duplicate Call Sign" message. 
 
-I then observed the rest of the list and noticed that the .csv itself does indeed have multiple rows with the same callsigns. I'm assuming that the device treats the callsign as some sort of primary key, and therefore removes the callsign entirely. What this means is that repeater stations that use the same callsign in the list have a callsign listed. This is a bad user experience. This script aims to fix the list so that the callsigns appear. 
+I then analyzed the rest of the list and noticed that the .csv itself does indeed have multiple rows with the same callsigns. I'm assuming that the device treats the callsign as some sort of primary key, and therefore resolves this by removing the callsign entirely. What this means is that repeater stations that use the same callsign in the list don't have a callsign shown on the device. This is a bad user experience. This script aims to fix the list so that the callsigns appear. 
 
 ## Example inputs and output
 
