@@ -1,0 +1,19 @@
+{
+  "name": "hamduplicatecallsignresolver",
+  "version": "1.0.0",
+  "description": "built for use with the icom id-52 plus. There are often multiple stations for a callsign in the csv. This causes the callsigns to be blank on the device. This attempts to append a character after the callsign to resolve this problem",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^5.2.0",
+    "mocha": "^11.1.0"
+  },
+  "devDependencies": {
+    "csv-parser": "^3.2.0",
+    "csv-writer": "^1.6.0"
+  }
+}
